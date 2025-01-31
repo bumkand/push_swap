@@ -6,7 +6,7 @@
 /*   By: jakand <jakand@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:19:52 by jakand            #+#    #+#             */
-/*   Updated: 2025/01/26 20:21:16 by jakand           ###   ########.fr       */
+/*   Updated: 2025/01/30 19:28:33 by jakand           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	main(int argc, char *argv[])
     write(1, "\n", 1);
 	i = 0;
 	first_move(a, b);
-	while (i != 2) // Spustenie funkcie x krat
+	while (i != 3) // Spustenie funkcie x krat
 	{
 		move_best_to_b(a, b);
 		i++;

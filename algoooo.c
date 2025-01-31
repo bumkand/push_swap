@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alghorithm.c                                       :+:      :+:    :+:   */
+/*   algoooo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jakand <jakand@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 20:26:35 by jakand            #+#    #+#             */
-/*   Updated: 2025/01/30 20:15:27 by jakand           ###   ########.fr       */
+/*   Updated: 2025/01/30 19:35:51 by jakand           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	get_best_position_b(t_stack *a, t_stack *b, int value) // myslim si ze tu su
 	t_node	*current_b;
 	t_node	*current_a;
 	int	position;
-	
+
 	int	nearest_value;
 	int	i;
 	int	best_position;
@@ -41,10 +41,12 @@ int	get_best_position_b(t_stack *a, t_stack *b, int value) // myslim si ze tu su
 	current_a = a->top;
 	nearest_value = 2147483647;
 	i = 0;
-	while (current_a->value != value)
+	while (current_a && current_a->value != value)
 	{
 		current_a = current_a->next;
 	}
+	if (!current_a)
+		return (-1);
 	while (current_b)
 	{
 		if (current_a->value > current_b->value)
@@ -68,10 +70,6 @@ int	get_best_position_b(t_stack *a, t_stack *b, int value) // myslim si ze tu su
 		current_b = current_b->next;
 		position++;
 	}
-
-	if (current_b)
-		printf("[b]%d\n", current_b->value);
-	printf("pppp:%d\n", position);
 	return (best_position);
 }
 
@@ -84,15 +82,15 @@ int	calculate_operations(t_stack *a, t_stack *b, int value)
 
 	pos_a = 0;
 	current = a->top;
-	operations = 100000000;
-	while (current->value != value)
+	operations = -1;
+	while (current && current->value != value)
 	{
 		current = current->next;
 		pos_a++;
 	}
+	if (current)
+		return (-1);
 	pos_b = get_best_position_b(a, b, value);
-	printf("pos_a:%d\n", pos_a);
-	printf("pos_b:%d\n", pos_b);
 	if (pos_a <= (a->size / 2) && pos_b <= (b->size / 2))
 		operations = (pos_a > pos_b) ? pos_a : pos_b; // Operation rr
 	if (pos_a > (a->size / 2) && pos_b > (b->size / 2))
@@ -106,7 +104,8 @@ int	calculate_operations(t_stack *a, t_stack *b, int value)
 		operations = pos_a + (b->size - pos_b);		//ra + rrb
 	if (pos_a > (a->size / 2) && pos_b <= (a->size / 2))
 		operations = (a->size - pos_a) + pos_b; // Operations rra + rb
-	printf("operations:%d\n", operations);
+	if (operations == -1)
+		return (0);
 	return (operations);
 }
 
@@ -125,6 +124,8 @@ void	execute_moves(t_stack *a, t_stack *b, int value)
 		pos_a++;
 	}
 	pos_b = get_best_position_b(a, b, current->value);
+	if (pos_b == -1)
+		return ;
 	if (pos_a <= (a->size / 2) && pos_b <= (b->size / 2))
 	{
 		while (pos_a > 0 && pos_b > 0)
@@ -148,7 +149,7 @@ void	execute_moves(t_stack *a, t_stack *b, int value)
 		}
 		while (pos_a++ < a->size)
 			rra(a);
-		while (pos_b++ < b->size)
+		while (pos_b++ < b->size - 1)
 			rrb(b);
 	}
 	else if (pos_a <= (a->size / 2))
@@ -168,7 +169,7 @@ void	execute_moves(t_stack *a, t_stack *b, int value)
 	}
 	else if (pos_b > (b->size / 2))
 	{
-		while (pos_b++ < b->size)
+		while (pos_b++ < b->size - 1)
 			rrb(b);
 	}
 	pb(a, b);
@@ -184,10 +185,8 @@ void	move_best_to_b(t_stack *a, t_stack *b)
 	current_a = a->top;
 	best_node = NULL;
 	min_operations = 2147483646;
-	printf("a->size:%d\n", a->size);
 	while (current_a != NULL)
 	{
-		printf("%d\n", current_a->value);
 		operations = calculate_operations(a, b, current_a->value);
 		if (operations < min_operations)
 		{
@@ -196,6 +195,8 @@ void	move_best_to_b(t_stack *a, t_stack *b)
 		}
 		current_a = current_a->next;
 	}
+	if (!best_node)
+		return ;
 	execute_moves(a, b, best_node->value);
 }
 

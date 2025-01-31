@@ -6,7 +6,7 @@
 /*   By: jakand <jakand@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 22:27:45 by jakand            #+#    #+#             */
-/*   Updated: 2025/01/25 15:47:32 by jakand           ###   ########.fr       */
+/*   Updated: 2025/01/29 22:16:53 by jakand           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,19 @@
 # include <unistd.h>
 # include <stdio.h>
 
-typedef struct	s_node
+typedef struct s_node
 {
 	int				value;
 	struct s_node	*next;
 	struct s_node	*prew;
 }	t_node;
 
-typedef struct	s_stack
+typedef struct s_stack
 {
 	t_node	*top;
 	t_node	*bottom;
-	int		size;	
+	int		size;
 }	t_stack;
-
 
 
 t_stack 	*init_stack (void);
@@ -52,7 +51,7 @@ void	rra(t_stack *a);
 void	rrb(t_stack *b);
 void	rrr(t_stack *a, t_stack *b);
 void	first_move(t_stack *a, t_stack *b);
-int		get_best_position_b(t_stack *b, int value);
+int		get_best_position_b(t_stack *a, t_stack *b, int value);
 int		calculate_operations(t_stack *a, t_stack *b, int value);
 void	move_best_to_b(t_stack *a, t_stack *b);
 void	execute_moves(t_stack *a, t_stack *b, int value);

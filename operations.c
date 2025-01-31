@@ -6,7 +6,7 @@
 /*   By: jakand <jakand@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:48:11 by jakand            #+#    #+#             */
-/*   Updated: 2025/01/23 21:03:24 by jakand           ###   ########.fr       */
+/*   Updated: 2025/01/30 21:10:43 by jakand           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,18 +116,55 @@ void	rra(t_stack *a)
 	}
 }
 
+void print_stack(t_stack *b)
+{
+    t_node *tmp = b->top;
+    printf("Stack B (from top to bottom): ");
+    while (tmp)
+    {
+        printf("%d ", tmp->value);
+        tmp = tmp->next;
+    }
+    printf("\n");
+    tmp = b->bottom;
+    printf("Stack B (from bottom to top): ");
+    while (tmp)
+    {
+        printf("%d ", tmp->value);
+        tmp = tmp->prew;
+    }
+    printf("\n");
+}
+
 void	rrb(t_stack *b)
 {
 	t_node	*node;
 
 	if (b->size > 1)
 	{
+		printf("Before rrb: ");
+		print_stack(b); // Vypíš obsah stacku pred operáciou
+
 		node = b->bottom;
+		if (!b->bottom->prew)
+		{
+			printf("Only one element\n");
+			return ;
+		}
+
 		b->bottom = b->bottom->prew;
+		printf("Middle of rrb\n");
 		b->bottom->next = NULL;
+
+		printf("Cont rrb\n");
 		node->next = b->top;
 		node->prew = NULL;
-		b->top = node;		
+		if (b->top)
+			b->top->prew = node;
+		b->top = node;
+
+		printf("After rrb: ");
+		print_stack(b); // Vypíš obsah stacku po operácii
 	}
 }
 

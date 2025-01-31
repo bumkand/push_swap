@@ -6,7 +6,7 @@
 /*   By: jakand <jakand@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 22:33:40 by jakand            #+#    #+#             */
-/*   Updated: 2025/01/23 21:05:20 by jakand           ###   ########.fr       */
+/*   Updated: 2025/01/30 21:07:48 by jakand           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,15 @@ int	push_stack (t_stack *stack, int value)
 
 	new_node = malloc(sizeof(t_node));
 	if (!new_node)
-		return (-1);
+		return (free (new_node), -1);
 	new_node->value = value;
 	new_node->next = stack->top;
 	new_node->prew = NULL;
 	if (stack->top)
 		stack->top->prew = new_node;
-	else
-		stack->bottom = new_node;
 	stack->top = new_node;
+	if (stack->size == 0)
+		stack->bottom = new_node;
 	stack->size++;
 	return (0);
 }
