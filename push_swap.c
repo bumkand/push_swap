@@ -33,14 +33,21 @@ int	push_stack (t_stack *stack, int value)
 	if (!new_node)
 		return (free (new_node), -1);
 	new_node->value = value;
-	new_node->next = stack->top;
-	new_node->prew = NULL;
-	if (stack->top)
-		stack->top->prew = new_node;
-	stack->top = new_node;
-	if (stack->size == 0)
-		stack->bottom = new_node;
+	if (stack->top == stack->bottom)
+		{
+			new_node->next = stack->bottom;
+			new_node->prew = stack->top;
+			stack->bottom = new_node;
+			stack->top = new_node;
+		}
+	else
+		{
+			new_node->next = stack->top;
+			stack->top = new_node;
+		}
+	
 	stack->size++;
+
 	return (0);
 }
 
