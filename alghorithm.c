@@ -14,73 +14,83 @@
 
 void	first_move(t_stack *a, t_stack *b)
 {
-	if (a->size == 4)
-	{
-		pb(a, b);
-		return ;
-	}
 	if (a->size > 4)
 	{
 		pb(a, b);
 		pb(a, b);
+		printf("pb\n");
+		printf("pb\n");
+	}
+	if (a->size == 4)
+	{
+		pb(a, b);
+		printf("pb\n");
+		return ;
 	}
 }
 
-int	get_best_position_b(t_stack *a, t_stack *b, int value) // myslim si ze tu su zle podmienky
+int	get_best_position_b(t_stack *b, int value) // myslim si ze tu su zle podmienky
 {
 	t_node	*current_b;
-	t_node	*current_a;
-	int	position;
-	
-	int	nearest_value;
-	int	i;
 	int	best_position;
-	
-	position = 0;
-	current_b = b->top;
-	current_a = a->top;
-	nearest_value = 2147483647;
-	i = 0;
-	while (current_a->value != value)
-	{
-		current_a = current_a->next;
-	}
-	while (current_b)
-	{
-		if (current_a->value > current_b->value)
-		{
-			i = current_a->value - current_b->value;
-			if (i < nearest_value)
-			{
-				nearest_value = i;
-				best_position = position;
-			}
-		}
-		if (current_a->value < current_b->value)
-		{
-			i = current_b->value - current_a->value;
-			if (i < nearest_value)
-			{
-				nearest_value = i;
-				best_position = position + 1;
-			}
-		}
-		current_b = current_b->next;
-		position++;
-	}
+	int	position;
+	int	min_diff;
+	int	max_value;
+	int	min_value;
+	int	max_position;
+	int	min_position;
 
-	if (current_b)
-		printf("[b]%d\n", current_b->value);
-	printf("pppp:%d\n", position);
+	current_b = b->top;
+	best_position = 0;
+	position = 0;
+	min_diff = 2147483647;
+	max_value = -2147483648;
+	min_value = 2147483647;
+	max_position = 0;
+	min_position = 0;
+	while (current_b)
+    {
+        if (current_b->value > max_value)
+        {
+            max_value = current_b->value;
+            max_position = position;
+        }
+        if (current_b->value < min_value)
+        {
+            min_value = current_b->value;
+            min_position = position;
+        }
+
+        if (current_b->value > value && current_b->value - value < min_diff)
+        {
+            min_diff = current_b->value - value;
+            best_position = position + 1;
+        }
+		if (value > current_b->value && value - current_b->value < min_diff)
+		{
+			min_diff = value - current_b->value;
+			best_position = position;
+		}
+        position++;
+        current_b = current_b->next;
+    }
+	
+	if (value > max_value)
+		return (max_position);  // Vložíme pod najväčšie číslo
+
+	if (value < min_value)
+		return (min_position + 1);  // Vložíme nad najmenšie číslo
+
+	// printf("b->size:%d\n", b->size);
 	return (best_position);
 }
 
 int	calculate_operations(t_stack *a, t_stack *b, int value)
 {
 	t_node	*current;
-	int	pos_a;
-	int	pos_b;
-	int	operations;
+	int		pos_a;
+	int		pos_b;
+	int		operations;
 
 	pos_a = 0;
 	current = a->top;
@@ -90,11 +100,17 @@ int	calculate_operations(t_stack *a, t_stack *b, int value)
 		current = current->next;
 		pos_a++;
 	}
-	pos_b = get_best_position_b(a, b, value);
-	printf("pos_a:%d\n", pos_a);
-	printf("pos_b:%d\n", pos_b);
+	pos_b = get_best_position_b(b, value);
+	// printf("pos_a:%d\n", pos_a);
+	// printf("pos_b:%d\n", pos_b);
+
 	if (pos_a <= (a->size / 2) && pos_b <= (b->size / 2))
-		operations = (pos_a > pos_b) ? pos_a : pos_b; // Operation rr
+	{
+		if (pos_a > pos_b)
+			operations = pos_a;
+		else
+			operations = pos_b;
+	} // Operation rr
 	if (pos_a > (a->size / 2) && pos_b > (b->size / 2))
 	{
 		if (a->size - pos_a > b->size - pos_b)
@@ -103,10 +119,10 @@ int	calculate_operations(t_stack *a, t_stack *b, int value)
 			operations = b->size - pos_b;
 	} // Operations rrr
 	if (pos_a <= (a->size / 2) && pos_b > (b->size / 2))
-		operations = pos_a + (b->size - pos_b);		//ra + rrb
-	if (pos_a > (a->size / 2) && pos_b <= (a->size / 2))
-		operations = (a->size - pos_a) + pos_b; // Operations rra + rb
-	printf("operations:%d\n", operations);
+		operations = pos_a + (b->size - pos_b);	//ra + rrb
+	if (pos_b <= (a->size / 2) && pos_a > (a->size / 2))
+		operations = pos_b + (a->size - pos_a);	// Operations rb + rra
+	// printf("operations:%d\n", operations);
 	return (operations);
 }
 
@@ -124,7 +140,20 @@ void	execute_moves(t_stack *a, t_stack *b, int value)
 		current = current->next;
 		pos_a++;
 	}
-	pos_b = get_best_position_b(a, b, current->value);
+	pos_b = get_best_position_b(b, current->value);
+	// printf("execute:\npos_a:%d\n", pos_a);
+	// printf("pos_b:%d\n", pos_b);
+	if (pos_a <= (a->size / 2) && pos_a == 1)
+	{
+		sa(a);
+		pos_a--;
+		printf("sa\n");
+	}
+	// if (pos_a <= (a->size / 2) && pos_b == 1)
+	// {
+	// 	sb(b);
+	// 	pos_b--;
+	// }
 	if (pos_a <= (a->size / 2) && pos_b <= (b->size / 2))
 	{
 		while (pos_a > 0 && pos_b > 0)
@@ -132,46 +161,81 @@ void	execute_moves(t_stack *a, t_stack *b, int value)
 			rr(a, b);
 			pos_a--;
 			pos_b--;
+			printf("rr\n");
 		}
-		while (pos_a-- > 0)
+		while (pos_a > 0)
+		{
 			ra(a);
-		while (pos_b-- > 0)
+			pos_a--;
+			printf("ra\n");
+		}
+		while (pos_b > 0)
+		{
 			rb(b);
+			pos_b--;
+			printf("rb\n");
+		}
 	}
 	else if (pos_a > (a->size / 2) && pos_b > (b->size / 2))
 	{
-		while ((a->size - pos_a) > 0 && (b->size - pos_b) > 0)
+		while (pos_a < a->size && pos_b < b->size)
 		{
 			rrr(a, b);
-			pos_a--;
-			pos_b--;
+			pos_a++;
+			pos_b++;
+			printf("rrr\n");
 		}
-		while (pos_a++ < a->size)
+		while (pos_a < a->size)
+		{
 			rra(a);
-		while (pos_b++ < b->size)
+			pos_a++;
+			printf("rra\n");
+		}
+		while (pos_b < b->size)
+		{
 			rrb(b);
+			pos_b++;
+			printf("rrb\n");
+		}
 	}
 	else if (pos_a <= (a->size / 2))
 	{
-		while (pos_a-- > 0)
+		while (pos_a > 0)
+		{
 			ra(a);
+			pos_a--;
+			printf("ra\n");
+		}
 	}
 	else if (pos_a > (a->size / 2))
 	{
-		while (pos_a++ < a->size)
+		while (pos_a < a->size)
+		{
 			rra(a);
+			pos_a++;
+			printf("rra\n");
+		}
 	}
 	if (pos_b <= (b->size / 2))
 	{
-		while (pos_b-- > 0)
+		while (pos_b > 0)
+		{
 			rb(b);
+			pos_b--;
+			printf("rb\n");
+		}
 	}
 	else if (pos_b > (b->size / 2))
 	{
-		while (pos_b++ < b->size)
+		while (pos_b < b->size)
+		{
 			rrb(b);
+			pos_b++;
+			printf("rrb\n");
+		}
 	}
 	pb(a, b);
+	printf("pb\n");
 }
 
 void	move_best_to_b(t_stack *a, t_stack *b)
@@ -184,21 +248,63 @@ void	move_best_to_b(t_stack *a, t_stack *b)
 	current_a = a->top;
 	best_node = NULL;
 	min_operations = 2147483646;
-	printf("a->size:%d\n", a->size);
+	// printf("a->size:%d\n", a->size);
 	while (current_a != NULL)
 	{
-		printf("%d\n", current_a->value);
+		// printf("%d\n", current_a->value);
 		operations = calculate_operations(a, b, current_a->value);
+		// printf("opp: %d\n", operations);
 		if (operations < min_operations)
 		{
 			min_operations = operations;
 			best_node = current_a;
 		}
 		current_a = current_a->next;
+		// printf("min_operations: %d\n", min_operations);
 	}
 	execute_moves(a, b, best_node->value);
 }
 
+void	biggest_to_top(t_stack *stack)
+{
+	t_node	*current;
+	int		max_value;
+	int		position;
+	int		max_position;
+
+	current = stack->top;
+	max_value = -2147483648;
+	position = 0;
+	max_position = 0;
+	while (current)
+	{
+		if (current->value > max_value)
+		{
+			max_value = current->value;
+			max_position = position;
+		}
+		current = current->next;
+		position++;
+	}
+
+	// Presunieme maximum na vrch pomocou `rb` alebo `rrb`
+	if (max_position <= (stack->size / 2))
+	{
+		while (max_position > 0)
+		{
+			rb(stack);
+			max_position--;
+		}
+	}
+	else
+	{
+		while (max_position < stack->size)
+		{
+			rrb(stack);
+			max_position++;
+		}
+	}
+}
 
 // int	is_sorted_a(t_stack *a)
 // {
