@@ -15,11 +15,11 @@
 int	main(int argc, char *argv[])
 {
 	int		i;
-	int		j;
+	// int		j;
 	t_stack	*a;
 	t_stack	*b;
-    t_node  *current_a;
-    t_node  *current_b;
+    // t_node  *current_a;
+    // t_node  *current_b;
 
 	if (argc < 2)
 		return (write(1, "You fuck** up with arguments\n", 29), 0);
@@ -45,53 +45,73 @@ int	main(int argc, char *argv[])
 		i++;
 	}
 
-    current_a = a->top;
-    i = a->size - 1;
-    while (current_a)
-    {
-        printf("Stack A[%d] = %d\n", i, current_a->value);
-        current_a = current_a->next;
-        i--;
-    }
-    write(1, "\n", 1);
-    current_b = b->top;
-    j = b->size - 1;
-    while (current_b)
-    {
-        printf("Stack b[%d] = %d\n", j, current_b->value);
-        current_b = current_b->next;
-        j--;
-    }
+    // current_a = a->top;
+    // i = a->size - 1;
+    // while (current_a)
+    // {
+    //     printf("Stack A[%d] = %d\n", i, current_a->value);
+    //     current_a = current_a->next;
+    //     i--;
+    // }
+    // print_stack(a);
+    // write(1, "\n", 1);
+    // current_b = b->top;
+    // j = b->size - 1;
+    // while (current_b)
+    // {
+    //     printf("Stack b[%d] = %d\n", j, current_b->value);
+    //     current_b = current_b->next;
+    //     j--;
+    // }
 	
-    write(1, "\n", 1);
-	i = 0;
+    // write(1, "\n", 1);
 	first_move(a, b);
-	while (i != 3) // Spustenie funkcie x krat
+	while (a->size != 0) // Spustenie funkcie x krat
 	{
 		move_best_to_b(a, b);
-		i++;
 	}
+    biggest_to_top(b);
 	
-    current_a = a->top;
-    i = a->size - 1;
-    while (current_a)
+    while (b->size != 0)
     {
-        printf("Stack A[%d] = %d\n", i, current_a->value);
-        current_a = current_a->next;
-        i--;
+        pa(a, b);
+        printf("pa\n");
     }
-    write(1, "\n", 1);
-    current_b = b->top;
-    j = b->size - 1;
-    while (current_b)
-    {
-        printf("Stack b[%d] = %d\n", j, current_b->value);
-        current_b = current_b->next;
-        j--;
-    }
+    write_stack(a, b);
+    // print_stack(a);
+    // print_stack(b);
+
+    // printf("Amount of Operations: %d\n", a->operations + b->operations);
 
 	free_stack(a);
 	free_stack(b);
 
 	return (0);
+}
+
+void    write_stack(t_stack *a, t_stack *b)
+{
+    int		i;
+    int		j;
+    t_node  *current_a;
+    t_node  *current_b;
+    
+    current_a = a->top;
+    i = a->size - 1;
+    while (current_a)
+    {
+        printf("Stack A[%d] = %d\n", i, current_a->value);
+        current_a = current_a->next;
+        i--;
+    }
+    write(1, "\n", 1);
+    current_b = b->top;
+    j = b->size - 1;
+    while (current_b)
+    {
+        printf("Stack b[%d] = %d\n", j, current_b->value);
+        current_b = current_b->next;
+        j--;
+    }
+    write(1, "\n", 1);
 }
