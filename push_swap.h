@@ -30,6 +30,7 @@ typedef struct s_stack
 	t_node	*top;
 	t_node	*bottom;
 	int		size;
+	int		operations;
 }	t_stack;
 
 
@@ -51,10 +52,14 @@ void	rra(t_stack *a);
 void	rrb(t_stack *b);
 void	rrr(t_stack *a, t_stack *b);
 void	first_move(t_stack *a, t_stack *b);
-int		get_best_position_b(t_stack *a, t_stack *b, int value);
+int		get_best_position_b(t_stack *b, int value);
 int		calculate_operations(t_stack *a, t_stack *b, int value);
 void	move_best_to_b(t_stack *a, t_stack *b);
 void	execute_moves(t_stack *a, t_stack *b, int value);
+void	biggest_to_top(t_stack *stack);
+
+void print_stack(t_stack *stack);
+void    write_stack(t_stack *a, t_stack *b);
 
 
 // void	calculate_chunks(int *array, int size, int chunk_count, int *chunk_limits);
