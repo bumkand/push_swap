@@ -6,7 +6,7 @@
 /*   By: jakand <jakand@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:48:11 by jakand            #+#    #+#             */
-/*   Updated: 2025/01/30 21:10:43 by jakand           ###   ########.fr       */
+/*   Updated: 2025/02/05 21:04:35 by jakand           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,26 +157,4 @@ void	rrr(t_stack *a, t_stack *b)
 	rra(a);
 	rrb(b);
 	a->operations--;
-}
-
-void print_stack(t_stack *stack)
-{
-    t_node *tmp;
-	
-	tmp = stack->top;
-    printf("Stack (from top to bottom): ");
-    while (tmp)
-    {
-        printf("%d ", tmp->value);
-        tmp = tmp->next;
-    }
-    printf("\n");
-    tmp = stack->bottom;
-    printf("Stack (from bottom to top): ");
-    while (tmp)
-    {
-        printf("%d ", tmp->value);
-        tmp = tmp->prew;
-    }
-    printf("\n");
 }

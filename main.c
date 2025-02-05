@@ -6,7 +6,7 @@
 /*   By: jakand <jakand@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:19:52 by jakand            #+#    #+#             */
-/*   Updated: 2025/01/30 19:28:33 by jakand           ###   ########.fr       */
+/*   Updated: 2025/02/05 21:06:26 by jakand           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,8 @@
 int	main(int argc, char *argv[])
 {
 	int		i;
-	// int		j;
 	t_stack	*a;
 	t_stack	*b;
-    // t_node  *current_a;
-    // t_node  *current_b;
 
 	if (argc < 2)
 		return (write(1, "You fuck** up with arguments\n", 29), 0);
@@ -44,27 +41,7 @@ int	main(int argc, char *argv[])
 		}
 		i++;
 	}
-
-    // current_a = a->top;
-    // i = a->size - 1;
-    // while (current_a)
-    // {
-    //     printf("Stack A[%d] = %d\n", i, current_a->value);
-    //     current_a = current_a->next;
-    //     i--;
-    // }
-    // print_stack(a);
-    // write(1, "\n", 1);
-    // current_b = b->top;
-    // j = b->size - 1;
-    // while (current_b)
-    // {
-    //     printf("Stack b[%d] = %d\n", j, current_b->value);
-    //     current_b = current_b->next;
-    //     j--;
-    // }
 	
-    // write(1, "\n", 1);
 	first_move(a, b);
 	while (a->size != 0) // Spustenie funkcie x krat
 	{
@@ -75,13 +52,11 @@ int	main(int argc, char *argv[])
     while (b->size != 0)
     {
         pa(a, b);
-        printf("pa\n");
+        write(1, "pa\n", 3);
     }
     write_stack(a, b);
-    // print_stack(a);
-    // print_stack(b);
 
-    // printf("Amount of Operations: %d\n", a->operations + b->operations);
+    printf("Amount of Operations: %d\n", a->operations + b->operations);
 
 	free_stack(a);
 	free_stack(b);
@@ -114,4 +89,26 @@ void    write_stack(t_stack *a, t_stack *b)
         j--;
     }
     write(1, "\n", 1);
+}
+
+void print_stack(t_stack *stack)
+{
+    t_node *tmp;
+	
+	tmp = stack->top;
+    printf("Stack (from top to bottom): ");
+    while (tmp)
+    {
+        printf("%d ", tmp->value);
+        tmp = tmp->next;
+    }
+    printf("\n");
+    tmp = stack->bottom;
+    printf("Stack (from bottom to top): ");
+    while (tmp)
+    {
+        printf("%d ", tmp->value);
+        tmp = tmp->prew;
+    }
+    printf("\n");
 }

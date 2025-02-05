@@ -6,7 +6,7 @@
 /*   By: jakand <jakand@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 20:26:35 by jakand            #+#    #+#             */
-/*   Updated: 2025/01/30 20:15:27 by jakand           ###   ########.fr       */
+/*   Updated: 2025/02/05 20:59:00 by jakand           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ void	first_move(t_stack *a, t_stack *b)
 	{
 		pb(a, b);
 		pb(a, b);
-		printf("pb\n");
-		printf("pb\n");
+		write(1, "pb\n", 3);
+		write(1, "pb\n", 3);
 	}
 	if (a->size == 4)
 	{
 		pb(a, b);
-		printf("pb\n");
+		write(1, "pb\n", 3);
 		return ;
 	}
 }
@@ -147,7 +147,7 @@ void	execute_moves(t_stack *a, t_stack *b, int value)
 	{
 		sa(a);
 		pos_a--;
-		printf("sa\n");
+		write(1, "sa\n", 3);
 	}
 	// if (pos_a <= (a->size / 2) && pos_b == 1)
 	// {
@@ -161,19 +161,19 @@ void	execute_moves(t_stack *a, t_stack *b, int value)
 			rr(a, b);
 			pos_a--;
 			pos_b--;
-			printf("rr\n");
+			write(1, "rr\n", 3);
 		}
 		while (pos_a > 0)
 		{
 			ra(a);
 			pos_a--;
-			printf("ra\n");
+			write(1, "ra\n", 3);
 		}
 		while (pos_b > 0)
 		{
 			rb(b);
 			pos_b--;
-			printf("rb\n");
+			write(1, "rb\n", 3);
 		}
 	}
 	else if (pos_a > (a->size / 2) && pos_b > (b->size / 2))
@@ -183,19 +183,19 @@ void	execute_moves(t_stack *a, t_stack *b, int value)
 			rrr(a, b);
 			pos_a++;
 			pos_b++;
-			printf("rrr\n");
+			write(1, "rrr\n", 4);
 		}
 		while (pos_a < a->size)
 		{
 			rra(a);
 			pos_a++;
-			printf("rra\n");
+			write(1, "rra\n", 4);
 		}
 		while (pos_b < b->size)
 		{
 			rrb(b);
 			pos_b++;
-			printf("rrb\n");
+			write(1, "rrb\n", 4);
 		}
 	}
 	else if (pos_a <= (a->size / 2))
@@ -204,7 +204,7 @@ void	execute_moves(t_stack *a, t_stack *b, int value)
 		{
 			ra(a);
 			pos_a--;
-			printf("ra\n");
+			write(1, "ra\n", 3);
 		}
 	}
 	else if (pos_a > (a->size / 2))
@@ -213,7 +213,7 @@ void	execute_moves(t_stack *a, t_stack *b, int value)
 		{
 			rra(a);
 			pos_a++;
-			printf("rra\n");
+			write(1, "rra\n", 4);
 		}
 	}
 	if (pos_b <= (b->size / 2))
@@ -222,7 +222,7 @@ void	execute_moves(t_stack *a, t_stack *b, int value)
 		{
 			rb(b);
 			pos_b--;
-			printf("rb\n");
+			write(1, "rb\n", 3);
 		}
 	}
 	else if (pos_b > (b->size / 2))
@@ -231,11 +231,11 @@ void	execute_moves(t_stack *a, t_stack *b, int value)
 		{
 			rrb(b);
 			pos_b++;
-			printf("rrb\n");
+			write(1, "rrb\n", 4);
 		}
 	}
 	pb(a, b);
-	printf("pb\n");
+	write(1, "pb\n", 3);
 }
 
 void	move_best_to_b(t_stack *a, t_stack *b)
@@ -294,6 +294,7 @@ void	biggest_to_top(t_stack *stack)
 		{
 			rb(stack);
 			max_position--;
+			write(1, "rb\n", 3);
 		}
 	}
 	else
@@ -302,6 +303,7 @@ void	biggest_to_top(t_stack *stack)
 		{
 			rrb(stack);
 			max_position++;
+			write(1, "rrb\n", 4);
 		}
 	}
 }
