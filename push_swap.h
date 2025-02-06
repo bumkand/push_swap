@@ -6,7 +6,7 @@
 /*   By: jakand <jakand@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 22:27:45 by jakand            #+#    #+#             */
-/*   Updated: 2025/01/29 22:16:53 by jakand           ###   ########.fr       */
+/*   Updated: 2025/02/06 19:13:29 by jakand           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,15 @@ void	biggest_to_top(t_stack *stack);
 
 void print_stack(t_stack *stack);
 void    write_stack(t_stack *a, t_stack *b);
+
+char	**ft_split(char const *s, char c);
+int	word_count(char const *s, char c);
+char	*ft_strdup(const char *s);
+size_t	ft_strlen(const char *s);
+char	*ft_strchr(const char *s, int c);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+void    free_split(char **arr);
+
 
 
 // void	calculate_chunks(int *array, int size, int chunk_count, int *chunk_limits);

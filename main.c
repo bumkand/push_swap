@@ -6,7 +6,7 @@
 /*   By: jakand <jakand@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:19:52 by jakand            #+#    #+#             */
-/*   Updated: 2025/02/05 21:06:26 by jakand           ###   ########.fr       */
+/*   Updated: 2025/02/06 19:26:26 by jakand           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 int	main(int argc, char *argv[])
 {
 	int		i;
+    int     j;
 	t_stack	*a;
 	t_stack	*b;
+    char    **nmbrs;
 
 	if (argc < 2)
 		return (write(1, "You fuck** up with arguments\n", 29), 0);
@@ -29,19 +31,29 @@ int	main(int argc, char *argv[])
 		write(2, "Error\n", 6);
 		return (1);
 	}
-	i = 1;
-	while (i < argc)
+    i = 1;
+	while (i < argc) // Prechádzame cez všetky argumenty
 	{
-		if (push_stack(a, ft_atoi(argv[i])) == -1)
+		nmbrs = ft_split(argv[i], ' '); // Rozdelíme argument na jednotlivé čísla
+		if (!nmbrs)
+			return (write(2, "Error\n", 6), 1);
+
+		j = 0;
+		while (nmbrs[j]) // Prechádzame cez jednotlivé čísla
 		{
-			write(2, "Error\n", 6);
-			free_stack(a);
-			free_stack(b);
-			return (1);
+			if (push_stack(a, ft_atoi(nmbrs[j])) == -1)
+			{
+				write(2, "Error\n", 6);
+				free_stack(a);
+				free_stack(b);
+				free_split(nmbrs); // Uvoľnenie pamäte
+				return (1);
+			}
+			j++;
 		}
+		free_split(nmbrs); // Uvoľnenie pamäte po spracovaní argumentu
 		i++;
 	}
-	
 	first_move(a, b);
 	while (a->size != 0) // Spustenie funkcie x krat
 	{
@@ -54,14 +66,29 @@ int	main(int argc, char *argv[])
         pa(a, b);
         write(1, "pa\n", 3);
     }
-    write_stack(a, b);
+    // write_stack(a, b);
 
-    printf("Amount of Operations: %d\n", a->operations + b->operations);
+    // printf("Amount of Operations: %d\n", a->operations + b->operations);
 
 	free_stack(a);
 	free_stack(b);
 
 	return (0);
+}
+
+void    free_split(char **arr)
+{
+    int i;
+
+    if (!arr)
+        return ;
+    i = 0;
+    while (arr[i])
+    {
+        free(arr[i]);
+        i++;
+    }
+    free(arr);
 }
 
 void    write_stack(t_stack *a, t_stack *b)
