@@ -6,7 +6,7 @@
 /*   By: jakand <jakand@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 22:27:45 by jakand            #+#    #+#             */
-/*   Updated: 2025/02/06 19:13:29 by jakand           ###   ########.fr       */
+/*   Updated: 2025/02/07 20:57:31 by jakand           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ typedef struct s_stack
 
 
 t_stack 	*init_stack (void);
-int		push_stack (t_stack *stack, int value);
+int		push_stack_a (t_stack *stack, int value);
+int	push_stack (t_stack *stack, int value);
 int		pop_stack (t_stack *stack);
 void		free_stack (t_stack *stack);
 int		main(int argc, char *argv[]);

@@ -6,7 +6,7 @@
 /*   By: jakand <jakand@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 20:26:35 by jakand            #+#    #+#             */
-/*   Updated: 2025/02/07 15:34:56 by jakand           ###   ########.fr       */
+/*   Updated: 2025/02/07 20:16:39 by jakand           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,22 +64,22 @@ int	get_best_position_b(t_stack *b, int value) // myslim si ze tu su zle podmien
         if (current_b->value > value && current_b->value - value < min_diff)
         {
             min_diff = current_b->value - value;
-            best_position = position;
+            best_position = position + 1;
         }
 		if (value > current_b->value && value - current_b->value < min_diff)
 		{
 			min_diff = value - current_b->value;
-			best_position = position + 1;
+			best_position = position;
 		}
         position++;
         current_b = current_b->next;
     }
 	
 	if (value > max_value)
-		return (max_position + 1);  // Vložíme pod najväčšie číslo
+		return (max_position);  // Vložíme pod najväčšie číslo
 
 	if (value < min_value)
-		return (min_position);  // Vložíme nad najmenšie číslo
+		return (min_position + 1);  // Vložíme nad najmenšie číslo
 
 	// printf("b->size:%d\n", b->size);
 	return (best_position);
@@ -273,12 +273,12 @@ void	biggest_to_top(t_stack *stack)
 	int		max_position;
 
 	current = stack->top;
-	max_value = 2147483647;
+	max_value = -2147483648;
 	position = 0;
 	max_position = 0;
 	while (current)
 	{
-		if (current->value < max_value)
+		if (current->value > max_value)
 		{
 			max_value = current->value;
 			max_position = position;

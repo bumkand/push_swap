@@ -6,7 +6,7 @@
 /*   By: jakand <jakand@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:19:52 by jakand            #+#    #+#             */
-/*   Updated: 2025/02/07 15:49:13 by jakand           ###   ########.fr       */
+/*   Updated: 2025/02/07 21:01:45 by jakand           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	main(int argc, char *argv[])
 		j = 0;
 		while (nmbrs[j]) // Prechádzame cez jednotlivé čísla
 		{
-			if (push_stack(a, ft_atoi(nmbrs[j])) == -1)
+			if (push_stack_a(a, ft_atoi(nmbrs[j])) == -1)
 			{
 				write(2, "Error\n", 6);
 				free_stack(a);
@@ -54,12 +54,16 @@ int	main(int argc, char *argv[])
 		free_split(nmbrs); // Uvoľnenie pamäte po spracovaní argumentu
 		i++;
 	}
+    // write_stack(a, b);
 	first_move(a, b);
+    // write_stack(a, b);
+
 	while (a->size != 0) // Spustenie funkcie x krat
 	{
 		move_best_to_b(a, b);
+        // write_stack(a, b);
 	}
-    // write_stack(a, b);
+    
     biggest_to_top(b);
     // write_stack(a, b);
 
@@ -67,8 +71,9 @@ int	main(int argc, char *argv[])
     {
         pa(a, b);
         write(1, "pa\n", 3);
+        // write_stack(a, b);
     }
-    // write_stack(a, b);
+    
     // print_stack(a);
 
     // printf("Amount of Operations: %d\n", a->operations + b->operations);
