@@ -6,7 +6,7 @@
 /*   By: jakand <jakand@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:19:52 by jakand            #+#    #+#             */
-/*   Updated: 2025/02/06 21:39:31 by jakand           ###   ########.fr       */
+/*   Updated: 2025/02/07 15:49:13 by jakand           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,17 @@ int	main(int argc, char *argv[])
 	{
 		move_best_to_b(a, b);
 	}
+    // write_stack(a, b);
     biggest_to_top(b);
-	
+    // write_stack(a, b);
+
     while (b->size != 0)
     {
         pa(a, b);
         write(1, "pa\n", 3);
     }
     // write_stack(a, b);
+    // print_stack(a);
 
     // printf("Amount of Operations: %d\n", a->operations + b->operations);
 

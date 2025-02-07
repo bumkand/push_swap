@@ -6,7 +6,7 @@
 /*   By: jakand <jakand@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 20:26:35 by jakand            #+#    #+#             */
-/*   Updated: 2025/02/06 21:39:01 by jakand           ###   ########.fr       */
+/*   Updated: 2025/02/07 15:34:56 by jakand           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 void	first_move(t_stack *a, t_stack *b)
 {
+	if (a->size == 4)
+	{
+		pb(a, b);
+		write(1, "pb\n", 3);
+		return ;
+	}
 	if (a->size > 4)
 	{
 		pb(a, b);
 		pb(a, b);
 		write(1, "pb\n", 3);
 		write(1, "pb\n", 3);
-	}
-	if (a->size == 4)
-	{
-		pb(a, b);
-		write(1, "pb\n", 3);
-		return ;
 	}
 }
 
