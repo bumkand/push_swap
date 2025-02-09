@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jakand <jakand@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jaandras <jaandras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 22:33:40 by jakand            #+#    #+#             */
-/*   Updated: 2025/02/07 20:57:03 by jakand           ###   ########.fr       */
+/*   Updated: 2025/02/08 16:15:09 by jaandras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack *init_stack (void)
+t_stack	*init_stack(void)
 {
-	t_stack		*stack;
+	t_stack	*stack;
 
 	stack = malloc(sizeof(t_stack));
 	if (!stack)
@@ -26,13 +26,13 @@ t_stack *init_stack (void)
 	return (stack);
 }
 
-int	push_stack_a (t_stack *stack, int value)
+int	push_stack_a(t_stack *stack, int value)
 {
 	t_node	*new_node;
 
 	new_node = malloc(sizeof(t_node));
 	if (!new_node)
-		return (free (new_node), -1);
+		return (free(new_node), -1);
 	new_node->value = value;
 	if (stack->top == NULL && stack->top == stack->bottom)
 	{
@@ -47,19 +47,17 @@ int	push_stack_a (t_stack *stack, int value)
 		stack->bottom->next = new_node;
 		stack->bottom = new_node;
 	}
-
 	stack->size++;
-
 	return (0);
 }
 
-int	push_stack (t_stack *stack, int value)
+int	push_stack(t_stack *stack, int value)
 {
 	t_node	*new_node;
 
 	new_node = malloc(sizeof(t_node));
 	if (!new_node)
-		return (free (new_node), -1);
+		return (free(new_node), -1);
 	new_node->value = value;
 	if (stack->top == NULL && stack->top == stack->bottom)
 	{
@@ -74,13 +72,11 @@ int	push_stack (t_stack *stack, int value)
 		stack->top->prew = new_node;
 		stack->top = new_node;
 	}
-
 	stack->size++;
-
 	return (0);
 }
 
-int	pop_stack (t_stack *stack)
+int	pop_stack(t_stack *stack)
 {
 	t_node	*temp;
 	int		value;
@@ -94,14 +90,14 @@ int	pop_stack (t_stack *stack)
 		stack->top->prew = NULL;
 	else
 		stack->bottom = NULL;
-	free (temp);
+	free(temp);
 	stack->size--;
 	return (value);
 }
 
-void	free_stack (t_stack *stack)
+void	free_stack(t_stack *stack)
 {
 	while (stack->top)
-		pop_stack (stack);
-	free (stack);
+		pop_stack(stack);
+	free(stack);
 }
