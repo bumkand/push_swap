@@ -6,7 +6,7 @@
 /*   By: jakand <jakand@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 22:27:45 by jakand            #+#    #+#             */
-/*   Updated: 2025/02/09 11:45:05 by jakand           ###   ########.fr       */
+/*   Updated: 2025/02/10 23:29:24 by jakand           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,15 @@ int					find_best_position(t_stack *b, int value,
 void				operations_counter(int *operations, t_stack *a, t_stack *b,
 						t_pos *data);
 int					find_max(t_stack *stack);
+void				rotate_both(t_stack *a, t_stack *b, t_pos *num);
+void				rev_rotate_both(t_stack *a, t_stack *b, t_pos *num);
+void				rot_rev_a(t_stack *a, t_pos *num);
+void				rot_rev_b(t_stack *b, t_pos *num);
+void				swap_a(t_stack *a, t_pos *num);
+void				two_num(t_stack *a);
+void				three_num(t_stack *a);
+void				swap_rev_rot(t_stack *a, t_node *top,
+					t_node *bottom, t_node *mid);
 
 void				print_stack(t_stack *stack);
 void				write_stack(t_stack *a, t_stack *b);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   alghorithm.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jakand <jakand@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jaandras <jaandras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 20:26:35 by jakand            #+#    #+#             */
-/*   Updated: 2025/02/09 11:44:22 by jakand           ###   ########.fr       */
+/*   Updated: 2025/02/09 17:36:51 by jaandras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	move_best_to_b(t_stack *a, t_stack *b)
 	}
 	execute_moves(a, b, best_node->value);
 }
-
 
 int	find_max(t_stack *stack)
 {

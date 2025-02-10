@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaandras <jaandras@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jakand <jakand@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:19:52 by jakand            #+#    #+#             */
-/*   Updated: 2025/02/08 21:08:28 by jaandras         ###   ########.fr       */
+/*   Updated: 2025/02/10 20:51:57 by jakand           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,22 +52,27 @@ int	main(int argc, char *argv[])
 		free_split(nmbrs); // Uvoľnenie pamäte po spracovaní argumentu
 		i++;
 	}
-	// write_stack(a, b);
-	first_move(a, b);
-	// write_stack(a, b);
-	while (a->size != 0) // Spustenie funkcie x krat
+	if (a->size > 3)
 	{
-		move_best_to_b(a, b);
+		first_move(a, b);
 		// write_stack(a, b);
+		while (a->size != 0) // Spustenie funkcie x krat
+		{
+			move_best_to_b(a, b);
+			// write_stack(a, b);
+		}
+		biggest_to_top(b);
+		// write_stack(a, b);
+		while (b->size != 0)
+		{
+			pa(a, b);
+			write(1, "pa\n", 3);
+			// write_stack(a, b);
+		}
 	}
-	biggest_to_top(b);
 	// write_stack(a, b);
-	while (b->size != 0)
-	{
-		pa(a, b);
-		write(1, "pa\n", 3);
-		// write_stack(a, b);
-	}
+	two_num(a);
+	three_num(a);
     // write_stack(a, b);
 	// print_stack(a);
 	// printf("Amount of Operations: %d\n", a->operations + b->operations);
