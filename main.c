@@ -6,7 +6,7 @@
 /*   By: jakand <jakand@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:19:52 by jakand            #+#    #+#             */
-/*   Updated: 2025/02/11 21:06:50 by jakand           ###   ########.fr       */
+/*   Updated: 2025/02/11 22:05:07 by jakand           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ int	main(int argc, char *argv[])
 	char	**nmbrs;
 
 	if (argc < 2)
-		return (write(1, "You fuc*ed up with arguments\n", 29), 0);
+		return (write(2, "Error\n", 6));
+	if (argc == 2)
+		return (0);
 	a = init_stack();
 	b = init_stack();
 	if (!a || !b)
@@ -52,29 +54,12 @@ int	main(int argc, char *argv[])
 		free_split(nmbrs); // Uvoľnenie pamäte po spracovaní argumentu
 		i++;
 	}
-	if (a->size > 5)
-	{
-		first_move(a, b);
-		// write_stack(a, b);
-		while (a->size != 0) // Spustenie funkcie x krat
-		{
-			move_best_to_b(a, b);
-			// write_stack(a, b);
-		}
-		biggest_to_top(b);
-		// write_stack(a, b);
-		while (b->size != 0)
-		{
-			pa(a, b);
-			write(1, "pa\n", 3);
-			// write_stack(a, b);
-		}
-	}
 	// write_stack(a, b);
 	two_num(a);
 	three_num(a);
 	four_num(a, b);
 	five_num(a, b);
+	all_num(a, b);
     // write_stack(a, b);
 	// print_stack(a);
 	// printf("Amount of Operations: %d\n", a->operations + b->operations);

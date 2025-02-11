@@ -6,7 +6,7 @@
 /*   By: jakand <jakand@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 22:27:45 by jakand            #+#    #+#             */
-/*   Updated: 2025/02/11 18:02:45 by jakand           ###   ########.fr       */
+/*   Updated: 2025/02/11 21:52:19 by jakand           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void				four_num(t_stack *a, t_stack *b);
 void				push_min_to_top(t_stack *a);
 int					is_sorted_a(t_stack *a);
 void				five_num(t_stack *a, t_stack *b);
+void				all_num(t_stack *a, t_stack *b);
 
 void				print_stack(t_stack *stack);
 void				write_stack(t_stack *a, t_stack *b);
