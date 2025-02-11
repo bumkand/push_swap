@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   min_num.c                                          :+:      :+:    :+:   */
+/*   swap_two_three.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jakand <jakand@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 19:18:54 by jakand            #+#    #+#             */
-/*   Updated: 2025/02/10 22:47:49 by jakand           ###   ########.fr       */
+/*   Updated: 2025/02/11 16:30:43 by jakand           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void	three_num(t_stack *a)
 	top = a->top;
 	bottom = a->bottom;
 	mid = a->top->next;
+	if (a->size > 3)
+		return ;
 	if (top->value > mid->value && top->value < bottom->value)
 	{
 		sa(a);

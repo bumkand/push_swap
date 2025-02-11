@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   alghorithm.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaandras <jaandras@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jakand <jakand@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 20:26:35 by jakand            #+#    #+#             */
-/*   Updated: 2025/02/09 17:36:51 by jaandras         ###   ########.fr       */
+/*   Updated: 2025/02/11 21:06:43 by jakand           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,19 +147,6 @@ void	biggest_to_top(t_stack *stack)
 // 	}
 // }
 
-// int	is_sorted_a(t_stack *a)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (a->data[i] > a->data[i + 1])
-// 	{
-// 		if (a->data[i] < a->data[i + 1])
-// 			return (0);
-// 		i++;
-// 	}
-// 	return (1);
-// }
 
 // int     is_sorted_b(t_stack *b)
 // {

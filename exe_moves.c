@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe_moves.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaandras <jaandras@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jakand <jakand@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 20:35:07 by jaandras          #+#    #+#             */
-/*   Updated: 2025/02/09 19:18:01 by jaandras         ###   ########.fr       */
+/*   Updated: 2025/02/11 16:37:19 by jakand           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ void	execute_moves(t_stack *a, t_stack *b, int value)
 	rev_rotate_both(a, b, &num);
 	rot_rev_a(a, &num);
 	rot_rev_b(b, &num);
+	
 	pb(a, b);
 	write(1, "pb\n", 3);
 }

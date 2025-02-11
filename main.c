@@ -6,7 +6,7 @@
 /*   By: jakand <jakand@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:19:52 by jakand            #+#    #+#             */
-/*   Updated: 2025/02/10 20:51:57 by jakand           ###   ########.fr       */
+/*   Updated: 2025/02/11 21:06:50 by jakand           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	main(int argc, char *argv[])
 		free_split(nmbrs); // Uvoľnenie pamäte po spracovaní argumentu
 		i++;
 	}
-	if (a->size > 3)
+	if (a->size > 5)
 	{
 		first_move(a, b);
 		// write_stack(a, b);
@@ -73,6 +73,8 @@ int	main(int argc, char *argv[])
 	// write_stack(a, b);
 	two_num(a);
 	three_num(a);
+	four_num(a, b);
+	five_num(a, b);
     // write_stack(a, b);
 	// print_stack(a);
 	// printf("Amount of Operations: %d\n", a->operations + b->operations);
